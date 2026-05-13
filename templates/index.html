@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digit Recognition · CNN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- CNN Layer Visualization Background -->
+    <canvas id="cnnBg"></canvas>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header glass-panel">
+            <div class="header-left">
+                <h1 class="title">DIGIT<span class="title-accent">.</span>CNN</h1>
+                <span class="subtitle">Convolutional Neural Network · Handwriting Recognition</span>
+            </div>
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon">☀️</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <div class="main">
+
+            <!-- Left Panel: Canvas -->
+            <section class="canvas-section glass-panel">
+                <div class="section-header">
+                    <span class="section-title">Drawing Canvas</span>
+                    <span class="canvas-size">280 × 280 px</span>
+                </div>
+                <p class="draw-hint">Draw a single digit <strong>0 – 9</strong> in the canvas below</p>
+
+                <div class="canvas-container">
+                    <canvas id="drawingCanvas" width="280" height="280"></canvas>
+                </div>
+
+                <!-- Brush Controls -->
+                <div class="brush-controls">
+                    <span class="control-label">Brush</span>
+                    <button class="brush-btn" id="brushMinus">−</button>
+                    <input type="range" id="brushSlider" min="5" max="30" value="12" step="1">
+                    <button class="brush-btn" id="brushPlus">+</button>
+                    <span class="brush-value" id="brushValue">12px</span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-row">
+                    <label class="realtime-label">
+                        <input type="checkbox" id="realtimeToggle" checked>
+                        <span>Realtime</span>
+                    </label>
+                    <button class="btn btn-primary" id="predictBtn">
+                        <span class="btn-icon">⚡</span> Predict
+                    </button>
+                    <button class="btn btn-secondary" id="clearBtn">Clear</button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results -->
+            <section class="result-section glass-panel">
+                <div class="section-header">
+                    <span class="section-title">Prediction Output</span>
+                    <span class="pulse-dot" id="pulseDot"></span>
+                </div>
+
+                <!-- Main Result -->
+                <div class="result-display">
+                    <div class="result-box">
+                        <div class="predicted-digit" id="predictedDigit">?</div>
+                    </div>
+                    <div class="result-info">
+                        <div class="confidence-display">
+                            <span class="confidence-value" id="confidenceValue">--</span>
+                            <span class="confidence-label">confidence</span>
+                        </div>
+                        <div class="warning-message" id="warningMessage"></div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- All Probabilities -->
+                <div class="probabilities-header">Distribution · All Digits 0–9</div>
+                <div class="probabilities" id="probabilities">
+                    <div class="empty-state">Draw a digit to see predictions</div>
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
