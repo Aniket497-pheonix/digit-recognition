@@ -6,7 +6,6 @@ import os
 
 from flask import Flask, render_template, request, jsonify
 from PIL import Image, ImageOps
-import tflite_runtime.interpreter as tflite
 
 app = Flask(__name__)
 
@@ -14,7 +13,8 @@ MODEL_PATH = 'models/mnist_cnn.tflite'
 
 # LOAD MODEL
 try:
-    interpreter = tflite.Interpreter(model_path=MODEL_PATH)
+    import tensorflow as tf
+    interpreter = tf.lite.Interpreter(model_path=MODEL_PATH)
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
     output_details = interpreter.get_output_details()
