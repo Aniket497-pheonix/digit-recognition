@@ -1,7 +1,7 @@
 flask==3.1.1
-numpy 
+numpy
 Pillow
-tensorflow
+tensorflow-cpu==2.15.0
 scikit-learn
 matplotlib
 gunicorn
