@@ -2,6 +2,7 @@ import io
 import re
 import base64
 import numpy as np
+import os
 
 from flask import Flask, render_template, request, jsonify
 from PIL import Image, ImageOps
@@ -130,4 +131,4 @@ def predict():
 
 # START SERVER
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=False)
